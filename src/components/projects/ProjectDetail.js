@@ -44,5 +44,4 @@ export default compose(
     firestoreConnect([
         {collection: 'projects'}
     ])
-)
-(ProjectDetail)
+)(ProjectDetail)
