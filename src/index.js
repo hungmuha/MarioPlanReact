@@ -12,14 +12,14 @@ import {reactReduxFirebase, getFirebase} from 'react-redux-firebase';
 import fbConfig from './config/fbConfig';
 import rootReducer from './store/reducers/rootReducer'
 
-const rrfConfig = { userProfile: 'users', attachAuthIsReady: true} // react-redux-firebase config
+const rrfConfig = { useFirestoreForProfile: true, userProfile: 'users', attachAuthIsReady: true} // react-redux-firebase config
 const store = createStore(rootReducer, 
     compose(
         //using compose to combine store-enhancers, in order to bind firestore with redux via config
         //so when we are using getFirebase and getFirestore, redux know which project we are connecting to
-        applyMiddleware(thunk.withExtraArgument({getFirebase,getFirestore})),
-        reactReduxFirebase(fbConfig,rrfConfig),
-        reduxFirestore(fbConfig) 
+		applyMiddleware(thunk.withExtraArgument({getFirebase,getFirestore})),
+		reduxFirestore(fbConfig),
+        reactReduxFirebase(fbConfig,rrfConfig)
     )
 );
 //reducer being passed to the store here 
